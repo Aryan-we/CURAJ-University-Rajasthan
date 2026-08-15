@@ -12,3 +12,6 @@
 
 
 <img src="IMG_20260812_184717.jpg" alt="photo" width="300px" height="300px">
+
+
+<img src="IMG_20260812_184933.jpg" alt="photo" width="300px" height="300px">
