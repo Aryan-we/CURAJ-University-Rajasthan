@@ -4,3 +4,5 @@
 <img src="IMG_20260728_161913.jpg" alt="photo" width="300px" height="300px">
 
 <img src="IMG_20260802_133947.jpg" alt="photo" width="300px" height="300px">
+
+<img src="IMG_20260805_173047.jpg" alt="photo" width="300px" height="300px">
