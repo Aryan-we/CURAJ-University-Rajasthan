@@ -1,0 +1,365 @@
+ Computer Networks Performance Modeling and Simulation: Study Notes
+
+ 1. Introduction to Computer Networks and the Need for Modeling & Simulation
+
+Computer networks are fundamental to modern life, supporting a vast array of activities. Their increasing complexity, driven by new protocols, architectures, and applications, makes performance evaluation a challenging task. Direct testing can be:
+
+   Costly: Real-world experimentation can be prohibitively expensive.
+   Disruptive: Performance studies can negatively impact user experience.
+   Physically Impossible: Networks in development or of immense scale may not be amenable to direct testing.
+
+Therefore, Modeling and Simulation (M&S) emerge as the primary alternative for examining network behavior and performance under various scenarios.
+
+   Modeling: The abstraction of a system's features and properties, focusing on those relevant to the study. A model is a logical representation, typically less complex than the real system.
+   Simulation: The imitation of a real-world system through a computational representation of its behavior, guided by the rules defined in a model. Simulations require focusing on a limited set of characteristics to remain tractable.
+
+ 1.1 Computer-Based Models
+
+Computer-based models can be classified along several dimensions:
+
+   Deterministic vs. Stochastic:
+       Deterministic: Predicts a single, specific output for a given input, with no randomness.
+       Stochastic: Incorporates randomness, predicting a set of possible outputs weighted by their probabilities.
+   Steady-state vs. Dynamic:
+       Steady-state: Analyzes system outputs after equilibrium is reached.
+       Dynamic: Examines system reactions to variable inputs over time.
+   Discrete vs. Continuous Values:
+       Discrete: State variables take values from a countable set.
+       Continuous: State variables can take any value within a range.
+       Combined Discrete-Continuous: Models aspects of both.
+   Discrete vs. Continuous Time:
+       Discrete Time: State changes occur only at specific, significant event instants.
+       Continuous Time: State variables change continuously.
+
+Note: Discrete models are most commonly used for network M&S.
+
+ Simulation Approaches:
+
+   Local Simulation: Performed on a single computer.
+   Distributed Simulation: Multiple interconnected systems work together.
+
+ 1.2 Advantages, Disadvantages, and Common Pitfalls of M&S
+
+ Advantages:
+
+   Reliable Decision Making: Allows testing a wide range of scenarios.
+   Flexibility: Simulation pace can be adjusted for detailed analysis.
+   Enhanced Learning: Users can reconstruct and examine scenarios closely.
+   Design Time Efficiency: Aids in specifying requirements and diagnosing problems.
+   Reduced Cost: Generally less expensive than empirical testing.
+   Avoids Disruptions: Enables assessment of new processes without affecting the live system.
+
+ Disadvantages:
+
+   Representation, Not Reality: M&S is an approximation, not the real system.
+   Interpretation Challenges: High randomness or complex interrelationships can lead to difficult or misleading interpretations.
+   Statistical Significance: Results may lack statistical significance if simulation runs are insufficient.
+   Specialized Skills Required: Building and conducting simulations demand expertise, incurring time and monetary costs.
+
+ Common Pitfalls:
+
+1.  Unnecessary Use: Employing M&S when simpler analytical solutions exist.
+2.  Misunderstood System: Incomplete knowledge of the system being modeled.
+3.  Loose Understanding of the Model: Lack of comprehension of the model's behavior or simulation results.
+4.  Unverified Models: Programming or logical errors in the simulation software.
+5.  Unrealistic Models: Models that do not accurately represent the real system's behavior.
+6.  Inappropriate Level of Detail: Too much or too little detail can hinder accurate performance assessment.
+7.  Excessive Simplifications: Overly aggressive assumptions can mask key performance factors.
+8.  Accuracy of Results: Variables can introduce bias and variance, leading to inaccurate models.
+9.  Inadequate Simulation Runtimes: Too short leads to insignificant results; too long wastes resources.
+10. Weak Random Number Generation: Poor generators can skew results.
+11. Unachievable Targets: Defining unrealistic goals for the simulation.
+12. Results Not Independently Repeatable: Lack of reproducibility undermines reliability.
+13. Lack of Essential Skills: Insufficient expertise in mathematics, statistics, modeling, or programming.
+14. Incorrect Programming Language Selection: Choosing a language that is inefficient or difficult to use.
+15. Inadequate Project Scheduling: Poor estimation of time for development, implementation, and testing.
+16. Unmanaged Simulation Projects: Lack of project management tools and practices.
+
+ 1.3 Computer Network Simulation
+
+Network simulation is crucial for research, development, and education. It's used for:
+
+   Protocol analysis
+   Complex network deployment
+   Evaluation of new services, prototypes, or architectures
+
+A network simulator acts as a black box, taking parameters as input and producing performance metrics as output.
+
+Discrete-event simulation is the predominant technique for network simulation because it efficiently models the behavior of computer networks, where states are relatively stable between events.
+
+ 2. Performance Modeling
+
+Performance modeling involves abstracting a system into a detailed model that reproduces its behavior under workload influence. Key objectives include obtaining performance metrics like throughput and response times.
+
+ 2.1 Modeling Techniques
+
+   Markov Chains (MC):
+       Stochastic models represented by graphs (nodes = states, links = transitions with probabilities).
+       Memoryless property: future states depend only on the present state.
+       Continuous Time Markov Chains (CTMC): Commonly used for discrete-event dynamic systems.
+       Can become complex with a high number of states.
+   Queuing Networks (QN):
+       Models customers (requests) arriving at service stations (servers).
+       Customers queue if servers are busy.
+       Arrival and service times are stochastic.
+       Useful for identifying performance bottlenecks due to shared resources.
+       Simple QN models have low-complexity steady-state solutions.
+       Do not effectively model synchronization mechanisms.
+   Petri Nets (PN):
+       Models of concurrent systems using graphs (places = states, transitions = evolution).
+       Evolve by firing enabled transitions (requires tokens in input places).
+       Timed Petri Nets (TPN): Add temporal specifications.
+           Stochastic Petri Nets (SPN): Transitions have non-null delays.
+           Generalized Stochastic Petri Nets (GSPN): Allow null and non-null delay transitions.
+
+Performance metrics can be obtained from CTMCs, QNs, and SPNs through analytical solutions, numerical algorithms, or discrete-event simulation.
+
+ 2.2 Protocol Modeling (TCP/IP Stack Focus)
+
+   Network Access Layer:
+       Often modeled as simple point-to-point links.
+       Detailed modeling of CSMA/CD or CSMA/CA can be intractable analytically, requiring simulation.
+       Level of detail depends on traffic load; differences between detailed and abstracted models become significant at higher loads.
+   Internet Layer:
+       Modeled as a graph with nodes and weighted links (bandwidth, delay).
+       Useful for routing problems (e.g., shortest path).
+       Can be extended with queuing networks to consider traffic patterns and node resources.
+   Transport Layer:
+       Direct Models: Aim to reproduce protocol interactions, often implemented fully in simulation. Useful for studying protocol behavior.
+       Performance Models: Often analytical, focusing on congestion mechanisms' influence on throughput.
+       Hybrid solutions combine analytical and simulation techniques.
+       Key parameters: throughput, end-to-end delay, jitter.
+
+ 2.3 Workload Modeling
+
+Workload models represent the traffic generated by applications, influencing network behavior. Accurate workload models are critical for credible results.
+
+   Data Collection: Server logs, client logs, packet traces.
+   Common Traffic Types:
+       Web Traffic:
+           Page-Oriented Models: Hierarchical (session, page, connection, packet levels).
+           ON/OFF Models: Represent download (ON) and idle (OFF) periods.
+       Voice Traffic:
+           User Level: Speaker model (talkspurts/pauses), session model (SIP/H.323).
+           Packet Level: Codec model (bit rate, packet size/inter-arrival), transport model (RTP).
+       Video Traffic:
+           User Level: User model (client-server requests), session model (RTSP).
+           Packet Level: Codec model (packet size/inter-arrival), transport model (RTP).
+
+ 2.4 Network Topology Modeling
+
+Topology defines how nodes are interconnected, influencing data flow and protocol performance.
+
+   Graph Representation: Vertices (nodes), edges (links).
+   Graph Properties: Average node degree, mean path length, betweenness.
+   Construction Approaches: Random graphs, geometric random graphs, hierarchical topologies.
+
+ 3. Performance Metrics in Computer Network Simulation
+
+Metrics are selected based on the layer being studied.
+
+ 3.1 Link Layer
+
+   Throughput: Ratio of bits received to transmission duration.
+       Nominal Channel Capacity (NCC): Maximum theoretical bits per unit time.
+       Effective Channel Capacity (ECC): NCC minus protocol overhead.
+       Channel Utilization (CU): Ratio of NCC to received bits per transmission time.
+   Transmission Errors:
+       Bit Error Rate (BER): Ratio of erroneous bits to total sent bits.
+       Packet Error Rate (PER): Ratio of erroneous packets to total received packets.
+   Wireless-Specific Metrics:
+       Spectral Efficiency: Bits per unit time per bandwidth per area.
+       Received Signal Strength Indication (RSSI): Signal strength at the receiver.
+       Access Point Transition Time (APTT): Handover duration.
+       Jain's Index: Fairness in medium access.
+   Signal Quality:
+       Signal-to-Noise Ratio (SNR): Ratio of signal power to noise power (wired).
+       Signal-to-Interference-Plus-Noise Ratio (SINR): Includes interference (wireless).
+
+ 3.2 Internet Layer
+
+Focuses on routing tasks: path selection and network topology management.
+
+   Path Selection Metrics:
+       Hop Count: Minimum number of hops.
+       Available Bandwidth: Link capacity not currently in use.
+       Round Trip Time (RTT): Delay for a probe to travel to a neighbor and back.
+       Expected Transmission Count (ETX): Predicted retransmissions needed.
+       Expected Transmission Time (ETT): Time for a packet to be correctly transmitted.
+       Weighted Cumulative Expected Transmission Time (WCETT): Balances delay and throughput.
+       Interference-aware metrics (MIC, iAWARE, WCETT-LB).
+   Network Topology Metrics:
+       Betweenness: Number of shortest paths passing through a node.
+       Node Degree: Number of connections to a node.
+
+ 3.3 Transport and Application Layer
+
+   Throughput: Can be measured at any layer to analyze protocol behavior.
+       TCP/UDP Throughput: Analyzes performance with varying protocol parameters.
+   End-to-End Delay: Time for a packet from source to destination.
+   Jitter: Variation in packet delay.
+   Goodput: Total bits received at the application layer divided by simulation time.
+   Overlay Network Metrics:
+       Delay Stretch: Ratio of application-level delay to IP-level delay.
+       Bandwidth: Overall bandwidth consumption.
+       Link Stress: Number of packet replicas traversing a link.
+       Cutoff Delay, Clustering, Spatial Growth, Proximity (for P2P overlays).
+
+ 4. Discrete-Event Simulation
+
+System changes occur at discrete instants (events), not continuously.
+
+ 4.1 Random Value Generation
+
+Essential for stochastic simulations.
+
+   Random-Number Generation: Produces a sequence of numbers (typically 0-1) with a uniform distribution.
+       Pseudorandom numbers: Repeatable sequences, useful for simulation.
+       Generators: Linear Congruential Generators (LCGs), Tausworthe Generators, Mersenne Twister (MT19937).
+       Verification: Plotting distribution, Chi-square, Kolmogorov-Smirnov tests.
+   Random-Variate Generation: Transforms uniform random numbers into values following a desired distribution.
+       Inverse Transformation Method: Uses the inverse of the Cumulative Distribution Function (CDF).
+       Composition Technique: For weighted sums of distributions.
+       Convolution Technique: For sums of random variables.
+
+ 4.2 Event-Driven Simulation
+
+   Core Components:
+       Event List: A time-sorted list of scheduled future events.
+       Simulation Clock: Tracks the current simulation time.
+   Process:
+    1.  Initialize event list with starting events.
+    2.  Fetch the next event from the event list.
+    3.  Advance simulation clock to the event's time.
+    4.  Execute the event's service routine, updating system state and scheduling new events.
+    5.  Repeat until the event list is empty, maximum simulation time is reached, or performance metrics stabilize.
+
+ 4.3 Process-Oriented Simulation
+
+   A higher-level approach that aggregates related events into processes.
+   Processes are active over time intervals and interact with each other.
+   Easier implementation and debugging compared to pure event-driven simulation.
+
+ 4.4 Parallel Simulation
+
+Addresses limitations of single-machine simulations (memory, execution time) by using multiple processors.
+
+   Goals: Improve execution speed (performance) and handle larger networks (scalability).
+   Strategies:
+       Time Parallel Simulation: Divides the simulation time axis into intervals, each processed by a different processor. Requires knowing initial states of intervals in advance.
+       Space Parallel Simulation: Partitions the network into subnetworks, with each subnetwork simulated by a logical process on a different processor. More flexible and widely applicable.
+           Key Issues: Partitioning, load balancing, synchronization.
+
+ 5. Validation and Verification
+
+Crucial for ensuring the trustworthiness of simulation results.
+
+   Validation: Assures the model's design and assumptions are reasonable and consistent with the real system.
+   Verification: Checks the correctness of the simulation program's implementation of the model.
+
+ 5.1 Model Validation
+
+   Aspects to Validate: Design/assumptions, input parameters/distributions, outputs.
+   Validation Sources:
+       Expert Opinions: Meetings with system developers, maintainers, and users.
+       Real System Measurements: Comparing simulation outputs with actual system data.
+       Theoretical Results: Comparing simulation results with analytical solutions for simplified models.
+   Scenarios: Focus on common utilization cases, but also consider extreme cases to define the model's operational range.
+
+ 5.2 Model Verification
+
+   General Programming Techniques: Debugging, code reviews.
+   Simulation-Specific Techniques:
+       Anti-bugging: Including checks within the program (e.g., packet sent vs. received).
+       Reference Counting: Tracking the lifecycle of simulated entities.
+       Constant Distributions: Replacing statistical distributions with constants to predict expected values.
+       Simplified Cases: Testing with minimal configurations and gradually increasing complexity, comparing with manual analysis.
+
+ 6. Network Simulators
+
+Tools that implement discrete-event simulation for network analysis.
+
+   Core Structures:
+       Simulation Time Variable: Tracks the current simulation time.
+       List of Pending Future Events: Manages scheduled events.
+   Simulator Architecture: Includes an API and programming language, often with specialized entities like schedulers.
+   Simulation Life Cycle: Events are executed in chronological order, potentially scheduling new events.
+   Key Entities:
+       Node: Represents network devices (routers, hosts).
+       Interface: Manages packet transmission/reception for a node.
+       Queue: Buffers for packet processing.
+       Link: Represents connectivity between nodes (bandwidth, delay, loss).
+       Packet: Carries data.
+       Protocol Stack: Implements network protocols.
+       Application Entity: Generates data packets.
+       Logging/Helper Entities: For data collection and model building.
+
+Examples of Network Simulators: NS-2, NS-3, OMNeT++, GTNetS, Cnet, EstiNet, GloMoSim, NetSim, OPNET, QualNet, SimPy.
+
+ 7. Case Study: Performance Evaluation of an Overlay Network
+
+   Scenario: Simulating an overlay network for synchronous e-training to provide efficient multicast delivery of multimedia streams.
+   Architecture: Three planes: relay mesh (data forwarding), signaling plane (SIP for negotiation), mesh control plane (RP managing relays).
+   Simulation Tool: ns-3 (C++, MRG32K3a random number generator).
+   Model Details:
+       Geographically dispersed sites with IP multicast and RTP relays.
+       WAN links with defined bandwidth and delay.
+       CSMA and point-to-point channels for LAN/WAN modeling.
+       Participant models generating audio, video, whiteboard, and telepointer streams with defined durations and inter-arrival times (using normal and exponential distributions).
+       Floor control policy limiting simultaneous streams.
+       Instructor and regular participant roles.
+   Analysis:
+       Metrics: Average bandwidth consumption, average packet loss, interarrival jitter (audio/video).
+       Results: Bandwidth consumption grows asymptotically due to floor control. Confidence intervals are small due to numerous simulation replicas.
+
+ Glossary
+
+   APTT (Access Point Transition Time): Duration of a handover between access points.
+   BER (Bit Error Rate): Ratio of erroneous bits to total bits transmitted.
+   CDF (Cumulative Distribution Function): A function that describes the probability that a random variable takes a value less than or equal to a given value.
+   CPU (Central Processing Unit): The primary component of a computer that performs most of the processing.
+   CSMA/CA (Carrier Sense Multiple Access with Collision Avoidance): A media access method used in wireless networks.
+   CSMA/CD (Carrier Sense Multiple Access with Collision Detection): A media access method used in wired Ethernet networks.
+   CTMC (Continuous Time Markov Chains): A stochastic model where transitions between states occur at random times.
+   CU (Channel Utilization): The ratio of the channel's capacity that is actually being used.
+   ECC (Effective Channel Capacity): The actual data transfer rate of a communication channel, excluding overhead.
+   EETT (Exclusive Expected Transmission Time): A routing metric considering only the expected transmission time of a link.
+   ETT (Expected Transmission Time): The expected time required to successfully transmit a packet over a link.
+   ETX (Expected Transmission Count): A routing metric that estimates the number of transmissions required to successfully deliver a packet.
+   FIFO (First In First Out): A queuing discipline where the first item to enter is the first to leave.
+   GSPN (Generalized Stochastic Petri Nets): A type of Petri net that includes both timed and instantaneous transitions.
+   H.264: A video compression standard.
+   H.323: A recommendation for multimedia communication over packet-based networks.
+   iAWARE (Interference Aware Routing Metric): A routing metric that considers interference.
+   iLBC (Internet Low Bitrate Codec): A speech codec designed for low-bandwidth applications.
+   IP (Internet Protocol): The principal communications protocol in the Internet protocol suite for relaying datagrams across network boundaries.
+   LAN (Local Area Network): A computer network that interconnects computers within a limited area.
+   LGCs (Linear Congruential Generators): A type of pseudorandom number generator.
+   MAC (Medium Access Control): A sublayer of the data link layer that controls how devices access the physical medium.
+   M&S (Modeling and Simulation): The process of creating abstract representations of systems and imitating their behavior.
+   NCC (Nominal Channel Capacity): The theoretical maximum data rate of a communication channel.
+   NIC (Network Interface Card): A hardware component that connects a computer to a computer network.
+   NS-3 (Network Simulator 3): An open-source discrete-event network simulator.
+   P2P (Peer to Peer): A distributed application architecture that partitions tasks or workloads between peers.
+   PDES (Parallel Discrete-Event Simulation): A simulation technique that uses multiple processors to execute discrete-event simulations.
+   PER (Packet Error Rate): The ratio of corrupted or lost packets to the total number of packets transmitted.
+   PN (Petri Nets): A mathematical modeling language for the description of distributed systems.
+   PTS (Simulated packet transmissions per second): A metric for measuring the performance of a network simulator.
+   QN (Queuing Networks): A mathematical model of a system where entities (customers) arrive at service stations and may have to wait in queues.
+   RP (Rendezvous Point): A central entity in some network architectures that facilitates communication and coordination.
+   RSSI (Received Signal Strength Indication): A measure of the signal strength received by a wireless device.
+   RTP (Real-time Transport Protocol): A network protocol for delivering audio and video over IP networks.
+   RTSP (Real Time Streaming Protocol): A network protocol designed for use with real-time data and media.
+   RTT (Round Trip Time): The time it takes for a signal to travel from a source to a destination and back.
+   SDP (Session Description Protocol): A protocol used to describe multimedia sessions.
+   SINR (Signal-to-Interference-Plus-Noise Ratio): A measure of signal quality in wireless communications.
+   SIP (Session Initiation Protocol): A signaling protocol used for initiating, maintaining, and terminating real-time sessions that include video, voice, messaging, and other communications applications.
+   SNE (Signal-to-Noise): A measure of signal quality.
+   SPN (Stochastic Petri Nets): A type of Petri net where transition firing times are random variables.
+   TCP (Transmission Control Protocol): A core protocol of the Internet protocol suite that provides reliable, ordered, and error-checked delivery of a stream of octets.
+   TCP/IP (Transmission Control Protocol/Internet Protocol): The foundational suite of communication protocols used for the Internet and similar computer networks.
+   TPN (Timed Petri Nets): A type of Petri net that incorporates time delays for transitions.
+   UDP (User Datagram Protocol): A simpler, connectionless communication protocol than TCP.
+   WAN (Wide Area Network): A telecommunications network that extends over a large geographic area.
+   WCETT (Weighted Cumulative Expected Transmission Time): A routing metric that considers both expected transmission time and link weights.
+   WCETT-LB (WCETT-load balancing): A variant of WCETT that incorporates load balancing considerations.
