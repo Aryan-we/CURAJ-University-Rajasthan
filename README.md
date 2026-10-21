@@ -1,5 +1,5 @@
 <h1>Central University of Rajasthan</h1>
-#curajgallery #curajuniversity
+#curajgallery #curajuniversity <br></be>
 Contact Me:<a href="https://aryan-we.github.io/Contact-Me/">
 <img src="IMG_20260728_122204.jpg" alt="photo" width="100%" height="500px">
 <img src="IMG_20260728_161858.jpg" alt="photo" width="100%" height="500px">
