@@ -2,9 +2,9 @@
 #curajgallery #curajuniversity <br></br>
 #Videos List <br>
 1.<a href="https://mojapp.in/akdlife3/video/3988802559?referrer=VZzxYbH-YRjYmJ&source=link">Rajasthani Matki Dance-2026</a><br>
-Images List:
+#Images List:
 <img src="IMG_20260728_122204.jpg" alt="photo" width="100%" height="500px">
-<img src="IMG_20260728_161858.jpg" alt="photo" width="100%" height="500px">
+
 <img src="IMG_20260728_161913.jpg" alt="photo" width="100%" height="500px">
 
 <img src="IMG_20260802_133947.jpg" alt="photo" width="100%" height="500px">
