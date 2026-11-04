@@ -1,5 +1,7 @@
 <h1>Central University of Rajasthan</h1>
-#curajgallery #curajuniversity <br></be>
+#curajgallery #curajuniversity <br></br>
+#Videos
+1.<a href="https://mojapp.in/akdlife3/video/3988802559?referrer=VZzxYbH-YRjYmJ&source=link">Rajasthani Dance-2026</a>
 <img src="IMG_20260728_122204.jpg" alt="photo" width="100%" height="500px">
 <img src="IMG_20260728_161858.jpg" alt="photo" width="100%" height="500px">
 <img src="IMG_20260728_161913.jpg" alt="photo" width="100%" height="500px">
